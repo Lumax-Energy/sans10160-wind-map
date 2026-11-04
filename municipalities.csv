@@ -1,0 +1,237 @@
+ProvinceID,Province,MunicipalityID,Municipality,vb0_3s_gust_m_s,South_deg,East_deg
+0,None,0,None,40,26.2136722,27.684173
+5,Limpopo,1,Aganang,36,23.6629041,28.8232471
+5,Limpopo,2,Ba-Phalaborwa,32,23.9507011,31.1341696
+5,Limpopo,3,Bela-Bela,36,24.8847369,28.2889638
+5,Limpopo,4,Blouberg,32,23.2904879,29.1437982
+5,Limpopo,5,Fetakgomo,36,24.4146578,29.746439
+5,Limpopo,6,Greater Giyani,32,23.385605,30.4391317
+5,Limpopo,7,Greater Letaba,32,23.5337294,30.0382018
+5,Limpopo,8,Greater Tzaneen,36,23.8575684,29.9907269
+5,Limpopo,9,Lepele-Nkumpi,36,24.291322,29.4189321
+5,Limpopo,10,Lephalale,32,23.6863019,27.6945248
+5,Limpopo,11,Makhado,32,23.1173619,29.6676998
+5,Limpopo,12,Makhuduthamaga,36,24.7365708,29.4966774
+5,Limpopo,13,Maruleng,36,24.3030871,30.4843022
+5,Limpopo,14,Modimolle,36,24.4338818,27.5393843
+5,Limpopo,15,Mogalakwena,36,23.8705743,28.1133783
+5,Limpopo,16,Molemole,36,23.5220445,29.2566268
+5,Limpopo,17,Mookgopong,36,24.5009854,28.3217144
+5,Limpopo,18,Musina,32,22.4406735,29.4985516
+5,Limpopo,19,Mutale,32,22.6041478,30.3612114
+5,Limpopo,20,Polokwane,36,23.9116036,29.381066
+5,Limpopo,21,Thabazimbi,36,24.5859334,27.3864723
+5,Limpopo,22,Thulamela,32,22.9037917,30.3089266
+3,Gauteng,23,City of Johannesburg,36,26.2091674,28.0500423
+3,Gauteng,24,City of Tshwane,36,25.745285,28.189303
+3,Gauteng,25,Ekurhuleni,36,26.1895285,28.2604827
+3,Gauteng,26,Emfuleni,36,26.6087593,27.6569193
+3,Gauteng,27,Lesedi,36,26.4232369,28.2401881
+3,Gauteng,28,Merafong City,36,26.368427,27.1129331
+3,Gauteng,29,Midvaal,36,26.6286064,27.8577732
+3,Gauteng,30,Mogale City,36,26.0041887,27.5429491
+3,Gauteng,31,Nokeng tsa Taemane,36,25.4531889,28.2478826
+3,Gauteng,32,Randfontein,36,26.176709,27.4695992
+3,Gauteng,33,West Rand,36,26.2203709,26.9881278
+3,Gauteng,34,Westonaria,36,26.3634667,27.5347543
+6,Mpumalanga,35,Albert Luthuli,36,26.1070426,30.1833829
+6,Mpumalanga,36,Delmas,36,26.1068374,28.4784129
+6,Mpumalanga,37,Dipaleseng,36,26.7830363,28.3355182
+6,Mpumalanga,38,Dr JS Moroka,36,25.1140498,28.4736525
+6,Mpumalanga,39,Emalahleni,36,25.8718962,29.1299695
+6,Mpumalanga,40,Govan Mbeki,36,26.522778,29.180278
+6,Mpumalanga,41,Highlands,36,25.8996455,29.2328928
+6,Mpumalanga,42,Lekwa,36,26.8947259,29.0688583
+6,Mpumalanga,43,Mbombela,32,25.3608691,30.6273626
+6,Mpumalanga,44,Middelburg,36,25.8293131,29.2423378
+6,Mpumalanga,45,Mkhondo,36,26.9248233,30.1987792
+6,Mpumalanga,46,Msukaligwa,36,26.5143617,29.8382631
+6,Mpumalanga,47,Nkomazi,32,25.650494,31.3514377
+6,Mpumalanga,48,Seme,36,27.1010457,29.7126934
+6,Mpumalanga,49,Steve Tshwete,36,25.8293131,29.2423378
+6,Mpumalanga,50,Thaba Chweu,36,24.9740554,29.9448003
+6,Mpumalanga,51,Thembisile,36,25.4893088,28.7087377
+6,Mpumalanga,52,Umjindi,36,25.7425686,30.8878492
+8,North-West,53,City of Matlosana,36,26.8532366,26.5731017
+8,North-West,54,Ditsobotla,36,26.113658,25.6995375
+8,North-West,55,Greater Taung,40,27.5496628,23.9316905
+8,North-West,56,Kagisano,36,26.4905411,23.4375683
+8,North-West,57,Kgetlengrivier,36,25.7496582,26.5550779
+8,North-West,58,Klerksdorp,36,26.8532366,26.5731017
+8,North-West,59,Lekwa-Teemane,40,27.6353714,24.7718657
+8,North-West,60,Madibeng,36,25.4282613,27.1778511
+8,North-West,61,Mafikeng,36,25.9446662,25.1494172
+8,North-West,62,Maquassi Hills,40,27.2831772,25.50174
+8,North-West,63,Molopo,36,25.8611532,23.162587
+8,North-West,64,Moretele,36,25.1789096,27.7714026
+8,North-West,65,Moses Kotane,36,25.1206198,26.6672375
+8,North-West,66,Moshaweng,36,26.7655711,22.8077539
+8,North-West,67,Naledi,40,26.9590125,24.7293925
+8,North-West,68,Rustenburg,36,25.648779,27.1834966
+8,North-West,69,Schweizer-Reneke,40,27.1715429,25.2280376
+8,North-West,70,Setla-Kgobi,36,26.1353635,24.7074279
+8,North-West,71,Tlokwe City Council,36,26.7162945,27.0961189
+8,North-West,72,Tswaing,36,26.5831615,25.4046182
+8,North-West,73,Ventersdorp,36,26.3211671,26.629888
+8,North-West,74,Zeerust,36,25.5387318,26.0766878
+2,Free State,75,Dihlabeng,40,28.3707342,28.016519
+2,Free State,76,Kopanong,40,29.944999,25.0913107
+2,Free State,77,Letsemeng,40,29.5481288,24.4986599
+2,Free State,78,Mafube,40,27.2798954,28.3410595
+2,Free State,79,Maluti a Phofung,40,28.3733991,28.750899
+2,Free State,80,Mangaung,40,29.1460937,26.1267295
+2,Free State,81,Mantsopa,40,29.1479391,26.6737289
+2,Free State,82,Masilonyana,40,28.6248213,25.9882777
+2,Free State,83,Matjhabeng,40,27.9592563,26.3734113
+2,Free State,84,Metsimaholo,40,26.9265909,27.7745683
+2,Free State,85,Mohokare,40,30.1290368,26.2153261
+2,Free State,86,Moqhaka,40,27.5661025,26.6366455
+2,Free State,87,Nala,40,27.599057,25.8957156
+2,Free State,88,Naledi,40,28.5865442,28.8056025
+2,Free State,89,Ngwathe,40,27.2792123,27.1490449
+2,Free State,90,Nketoana,40,27.8639897,27.9713587
+2,Free State,91,Phumelela,40,27.6322915,28.6900957
+2,Free State,92,Setsoto,40,28.5672572,27.0089726
+2,Free State,93,Tokologo,40,28.3769199,24.8700872
+2,Free State,94,Tswelopele,40,28.0752145,25.3354017
+4,Kwazulu-Natal,95,Abaqulusi,36,27.8307097,30.7946487
+4,Kwazulu-Natal,96,Dannhauser,40,27.9887057,29.8264044
+4,Kwazulu-Natal,97,eDumbe,36,27.4831702,30.5466035
+4,Kwazulu-Natal,98,Emadlangeni,40,27.6372999,30.0187236
+4,Kwazulu-Natal,99,Emnambithi,40,28.4216541,29.446884
+4,Kwazulu-Natal,100,eNdondakusuka,40,29.1194521,31.355867
+4,Kwazulu-Natal,101,Endumeni,40,28.1842244,29.9980989
+4,Kwazulu-Natal,102,Ethekwini,36,29.8839586,30.5926558
+4,Kwazulu-Natal,103,Ezingoleni,36,30.7582496,30.0384848
+4,Kwazulu-Natal,104,Greater Kokstad,40,30.2873736,29.047095
+4,Kwazulu-Natal,105,Hibiscus Coast,36,30.8104892,30.0721602
+4,Kwazulu-Natal,106,Hlabisa,36,28.1459502,31.8569007
+4,Kwazulu-Natal,107,Imbabazane,40,29.0052408,29.8561715
+4,Kwazulu-Natal,108,Impendle,40,29.5787029,29.6546596
+4,Kwazulu-Natal,109,Indaka,40,28.5609423,30.1166828
+4,Kwazulu-Natal,110,Ingwe,40,29.8708736,29.5190947
+4,Kwazulu-Natal,111,Jozini,32,27.3648059,31.6225702
+4,Kwazulu-Natal,112,Kwa Sani,40,29.7689385,29.1667853
+4,Kwazulu-Natal,113,KwaDukuza,36,29.3529306,30.9812985
+4,Kwazulu-Natal,114,Maphumulo,40,29.1034287,30.7945144
+4,Kwazulu-Natal,115,Matatiele,40,30.3476185,28.475745
+4,Kwazulu-Natal,116,Mkhambathini,40,29.8447635,30.2685197
+4,Kwazulu-Natal,117,Mpofana,40,29.1527037,29.7357694
+4,Kwazulu-Natal,118,Msinga,40,28.603654,30.2127392
+4,Kwazulu-Natal,119,Msunduzi,40,29.6343378,30.1704296
+4,Kwazulu-Natal,120,Mthonjaneni,36,28.5759014,31.2360244
+4,Kwazulu-Natal,121,Mtubatuba,32,28.3048743,32.006979
+4,Kwazulu-Natal,122,Ndwedwe,36,29.4012586,30.7030645
+4,Kwazulu-Natal,123,Newcastle,40,27.695615,29.6532336
+4,Kwazulu-Natal,124,Nkandla,40,28.646254,30.7044291
+4,Kwazulu-Natal,125,Nongoma,36,27.9054697,31.4638287
+4,Kwazulu-Natal,126,Nqutu,40,28.2974292,30.4913339
+4,Kwazulu-Natal,127,Ntambanana,36,28.5950935,31.7201129
+4,Kwazulu-Natal,128,Okhahlamba,40,28.7303889,29.0617291
+4,Kwazulu-Natal,129,Richmond,40,29.9170583,30.1406696
+4,Kwazulu-Natal,130,The Big 5 False Bay,32,27.9019596,31.9950137
+4,Kwazulu-Natal,131,Ubuhlebezwe,40,30.1878835,29.8687449
+4,Kwazulu-Natal,132,Ulundi,36,28.307934,31.3865399
+4,Kwazulu-Natal,133,Umdoni,36,30.3505694,30.5233751
+4,Kwazulu-Natal,134,Umhlabuyalingana,32,27.2204855,32.2546184
+4,Kwazulu-Natal,135,uMhlathuze,36,28.7882818,31.7899546
+4,Kwazulu-Natal,136,uMlalazi,36,28.9350138,31.1520092
+4,Kwazulu-Natal,137,uMngeni,40,28.9270721,30.310946
+4,Kwazulu-Natal,138,uMshwathi,40,29.3937035,30.3177045
+4,Kwazulu-Natal,139,Umtshezi,40,28.9295638,29.7181243
+4,Kwazulu-Natal,140,UMuziwabantu,40,30.6473394,29.7317897
+4,Kwazulu-Natal,141,Umvoti,40,29.0050838,30.3943393
+4,Kwazulu-Natal,142,Umzumbe,36,30.4856191,30.1927152
+4,Kwazulu-Natal,143,UPhongolo,32,27.5398101,31.2610887
+4,Kwazulu-Natal,144,Vulamehlo,36,30.2126887,30.4363397
+7,Northern Cape,145,Kheis,40,28.8815777,21.1113933
+7,Northern Cape,146,Khara Hais,40,28.3786542,20.970704
+7,Northern Cape,147,Dikgatlong,40,28.4026741,24.082949
+7,Northern Cape,148,Emthanjeni,40,30.8151491,23.3427726
+7,Northern Cape,149,Gamagara,36,27.669,22.7273786
+7,Northern Cape,150,Ga-Segonyana,36,27.5484351,23.3218587
+7,Northern Cape,151,Hantam,36,31.0805951,18.6406809
+7,Northern Cape,152,Kai Garib,40,28.9020274,20.0806734
+7,Northern Cape,153,Kamiesberg,32,30.5160822,17.4153925
+7,Northern Cape,154,Kareeberg,40,30.5989364,21.5972622
+7,Northern Cape,155,Karoo Hoogland,40,31.6914819,20.0217375
+7,Northern Cape,156,Kgatelopele,36,28.2327093,23.346644
+7,Northern Cape,157,Khâi-Ma,36,29.1627533,18.5853339
+7,Northern Cape,158,Magareng,40,28.1739594,24.501169
+7,Northern Cape,159,Mier,36,26.2949637,20.0361475
+7,Northern Cape,160,Nama Khoi,32,29.3879259,17.3101874
+7,Northern Cape,161,Phokwane,40,27.7993555,24.6916294
+7,Northern Cape,162,Renosterberg,40,30.2834899,23.8356564
+7,Northern Cape,163,Richtersveld,32,29.0024939,17.097283
+7,Northern Cape,164,Siyancuma,40,29.0928148,23.2226388
+7,Northern Cape,165,Siyathemba,40,29.45718,22.0046496
+7,Northern Cape,166,Sol Plaatje,40,28.735779,24.3268792
+7,Northern Cape,167,Thembelihle,40,29.6390277,23.294275
+7,Northern Cape,168,Tsantsabane,36,28.310011,22.6263621
+7,Northern Cape,169,Ubuntu,40,31.39573,21.9667093
+7,Northern Cape,170,Umsobomvu,40,30.819354,24.4750777
+9,Western Cape,171,Beaufort West,40,32.3082007,21.7321911
+9,Western Cape,172,Bergrivier,40,32.8102057,18.3634012
+9,Western Cape,173,Bitou Municipality,36,33.9463388,23.2931851
+9,Western Cape,174,Breede River/Winelands,40,33.8165475,19.7082118
+9,Western Cape,175,Breede Valley,44,33.6426622,19.3313916
+9,Western Cape,176,Cape Agulhas,44,34.5174371,19.7072222
+9,Western Cape,177,Cederberg,36,32.3590702,18.3428332
+9,Western Cape,178,City of Cape Town,40,34.0228115,18.4659687
+9,Western Cape,179,Drakenstein,40,33.5024819,18.7192217
+9,Western Cape,180,George,36,33.9361167,22.3569352
+9,Western Cape,181,Kannaland,36,33.6140722,20.6789842
+9,Western Cape,182,Knysna,36,33.9437112,22.8363401
+9,Western Cape,183,Laingsburg,40,33.0130107,20.3891928
+9,Western Cape,184,Langeberg,40,33.8410859,19.9426274
+9,Western Cape,185,Matzikama,32,31.6484131,18.5139486
+9,Western Cape,186,Mossel Bay,36,34.0941982,21.717047
+9,Western Cape,187,Oudtshoorn,36,34.0859431,20.8760375
+9,Western Cape,188,Overstrand,44,34.4394619,19.4563579
+9,Western Cape,189,Prince Albert,40,32.9849308,21.6164377
+9,Western Cape,190,Saldanha Bay,40,32.9633965,17.9108944
+9,Western Cape,191,Stellenbosch,40,33.9280107,18.8359801
+9,Western Cape,192,Swartland,40,33.2927064,18.2545916
+9,Western Cape,193,Swellendam,40,34.1084632,20.095988
+9,Western Cape,194,Theewaterskloof,40,34.1536933,19.188107
+9,Western Cape,195,Witzenberg,40,33.0955651,18.728823
+1,Eastern Cape,196,Amahlathi,40,32.4672903,27.0709062
+1,Eastern Cape,197,Baviaans,36,33.4175658,23.4587487
+1,Eastern Cape,198,Blue Crane Route,36,32.792007,24.9276023
+1,Eastern Cape,199,Buffalo City,40,32.978646,27.3390424
+1,Eastern Cape,200,Camdeboo,36,32.1445219,23.8093908
+1,Eastern Cape,201,Elundini,44,30.924213,27.7542328
+1,Eastern Cape,202,Emalahleni,44,31.6252497,27.0987847
+1,Eastern Cape,203,Engcobo,44,31.6674217,27.9555463
+1,Eastern Cape,204,Gariep,40,30.9819575,25.515938
+1,Eastern Cape,205,Great Kei,40,32.6809056,27.7468363
+1,Eastern Cape,206,Ikwezi,36,32.992486,24.2960514
+1,Eastern Cape,207,Ingquza Hill,40,31.217572,29.3411664
+1,Eastern Cape,208,Inkwanca,40,31.5157793,26.1822606
+1,Eastern Cape,209,Intsika Yethu,44,31.9445346,27.3751108
+1,Eastern Cape,210,Inxuba Yethemba,40,31.8617692,24.7949451
+1,Eastern Cape,211,King Sabata Dalindye,44,31.7476233,28.4642913
+1,Eastern Cape,212,Kouga,40,33.9113718,24.5741604
+1,Eastern Cape,213,Kou-Kamma,36,33.8560301,23.7482618
+1,Eastern Cape,214,Lukanji,44,32.0589897,26.7259959
+1,Eastern Cape,215,Makana,40,33.2515165,26.1983965
+1,Eastern Cape,216,Maletswai,40,31.0225219,26.2989881
+1,Eastern Cape,217,Mbhashe,40,32.1154788,28.3592259
+1,Eastern Cape,218,Mbizana,40,30.8598213,29.8059213
+1,Eastern Cape,219,Mhlontlo,44,31.1678339,28.5147155
+1,Eastern Cape,220,Mnquma,40,32.351993,27.9116875
+1,Eastern Cape,221,Ndlambe,40,33.509527,26.4535522
+1,Eastern Cape,222,Nelson Mandela,40,33.8006771,25.2499968
+1,Eastern Cape,223,Ngqushwa,40,33.1915739,26.8819465
+1,Eastern Cape,224,Nkonkobe,40,32.7252506,26.5374112
+1,Eastern Cape,225,Ntabankulu,40,30.9736701,29.2842409
+1,Eastern Cape,226,Nxuba,40,30.9952088,29.0218553
+1,Eastern Cape,227,Nyandeni,44,31.6091477,28.7614771
+1,Eastern Cape,228,Port St Johns,40,31.6225402,29.5435171
+1,Eastern Cape,229,Qaukeni,40,31.217572,29.3411664
+1,Eastern Cape,230,Sakhisizwe,44,31.4666941,27.5581405
+1,Eastern Cape,231,Senqu,40,30.8653837,27.0197278
+1,Eastern Cape,232,Sunday's River Valley,40,33.510189,25.5506433
+1,Eastern Cape,233,Tsolwana,40,31.8489643,25.4699451
+1,Eastern Cape,234,Umzimkhulu,40,30.2738035,29.474165
+1,Eastern Cape,235,Umzimvubu,40,30.8240738,28.7631253

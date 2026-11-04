@@ -1,0 +1,559 @@
+<title>SANS 10160-3 Wind Map</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: survey-sheet workbench. Map plate on the left, a narrow calculation strip on the right; stacks on phones. */
+:root {
+  --bg: #eef0ec;
+  --surface: #f9faf7;
+  --plate: #ffffff;
+  --fg: #1c211d;
+  --muted: #5d665f;
+  --line: #cfd5cc;
+  --accent: #1d4fd8;
+  --accent-ink: #ffffff;
+  --grid: #d33a2c;
+  --warn-bg: #fff3d6;
+  --warn-fg: #7a4b00;
+  --err-bg: #fde4e1;
+  --err-fg: #8f1d12;
+  --ok-fg: #1f6b3a;
+  --z44: #cd8966; --z40: #f5ca7b; --z36: #ffffbe; --z32: #c8d79e;
+  --font-display: "Barlow Semi Condensed", "Arial Narrow", system-ui, sans-serif;
+  --font-body: "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --r: 6px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141815; --surface: #1c211d; --plate: #f4f5f1; --fg: #e5e9e3; --muted: #9aa49c;
+    --line: #333b35; --accent: #7aa2ff; --accent-ink: #0b1430; --grid: #ff6b5c;
+    --warn-bg: #3a2c0c; --warn-fg: #ffd58a; --err-bg: #3d1712; --err-fg: #ffb4a8; --ok-fg: #7fd69c;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #141815; --surface: #1c211d; --plate: #f4f5f1; --fg: #e5e9e3; --muted: #9aa49c;
+  --line: #333b35; --accent: #7aa2ff; --accent-ink: #0b1430; --grid: #ff6b5c;
+  --warn-bg: #3a2c0c; --warn-fg: #ffd58a; --err-bg: #3d1712; --err-fg: #ffb4a8; --ok-fg: #7fd69c;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.45;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 20px 32px;
+}
+.wrap { max-width: 1280px; margin: 0 auto; display: grid; gap: 18px; }
+header { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 8px 24px; border-bottom: 2px solid var(--fg); padding-bottom: 10px; }
+h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.1rem); letter-spacing: .01em; margin: 0; line-height: 1.05; text-wrap: balance; }
+.eyebrow { font-family: var(--font-display); font-weight: 600; text-transform: uppercase; letter-spacing: .09em; font-size: .78rem; color: var(--muted); }
+.figref { font-size: .9rem; color: var(--muted); max-width: 52ch; }
+.main { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 18px; align-items: start; }
+@media (max-width: 900px) { .main { grid-template-columns: minmax(0, 1fr); } }
+
+/* map */
+.mapcol { display: grid; gap: 10px; min-width: 0; }
+.maptools { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: space-between; }
+.maptitle { font: 600 .95rem var(--font-display); letter-spacing: .03em; }
+.checks { display: flex; gap: 14px; flex-wrap: wrap; font-size: .9rem; color: var(--muted); }
+.checks label { display: inline-flex; gap: 6px; align-items: center; cursor: pointer; }
+.plate { position: relative; background: var(--plate); border: 1px solid var(--line); border-radius: var(--r); padding: 8px; }
+.stage { position: relative; width: 100%; line-height: 0; }
+.stage img { display: block; width: 100%; height: auto; max-width: 100%; user-select: none; -webkit-user-drag: none; }
+.stage svg { position: absolute; inset: 0; width: 100%; height: 100%; cursor: crosshair; touch-action: manipulation; }
+.stage svg:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.tip { position: absolute; pointer-events: none; background: #1c211d; color: #f4f5f1; font: 500 12px/1.35 var(--font-mono); padding: 5px 7px; border-radius: 4px; white-space: nowrap; transform: translate(12px, 12px); z-index: 2; }
+.tip .sw { display: inline-block; width: 9px; height: 9px; border: 1px solid #000; margin-right: 5px; vertical-align: -1px; }
+.maphint { font-size: .85rem; color: var(--muted); }
+
+/* panel */
+.panel { display: grid; gap: 14px; min-width: 0; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 14px; display: grid; gap: 10px; min-width: 0; }
+.card h2 { margin: 0; font: 700 .82rem var(--font-display); text-transform: uppercase; letter-spacing: .09em; color: var(--muted); }
+label.f { display: grid; gap: 3px; font-size: .85rem; color: var(--muted); }
+select, input[type="number"], input[type="text"] {
+  font: 500 .95rem var(--font-body); color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 4px; padding: 6px 8px; width: 100%; min-width: 0;
+}
+input[type="number"] { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+select:focus-visible, input:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.dms { display: grid; grid-template-columns: 70px repeat(3, minmax(0, 1fr)); gap: 6px; align-items: center; }
+.dms .lab { font: 600 .9rem var(--font-display); }
+.dms .hd { font-size: .75rem; color: var(--muted); text-align: center; }
+.dec { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.msg { font-size: .85rem; padding: 7px 9px; border-radius: 4px; }
+.msg.err { background: var(--err-bg); color: var(--err-fg); }
+.msg.warn { background: var(--warn-bg); color: var(--warn-fg); }
+
+.result { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; align-items: center; }
+.vb { font: 700 3.2rem/1 var(--font-display); font-variant-numeric: tabular-nums; display: flex; align-items: baseline; gap: 6px; }
+.vb small { font: 600 1rem var(--font-display); color: var(--muted); }
+.vbsym { font: 600 .95rem var(--font-display); }
+.vbsym sub { font-size: .7em; }
+.src { font-size: .85rem; color: var(--muted); }
+dl.kv { margin: 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 6px 12px; font-size: .9rem; }
+dl.kv dt { color: var(--muted); }
+dl.kv dd { margin: 0; font-family: var(--font-mono); font-size: .84rem; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.chip { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-mono); }
+.chip .sw { width: 11px; height: 11px; border: 1px solid #333; display: inline-block; }
+.flag { font-family: var(--font-body); font-size: .82rem; }
+.flag.ok { color: var(--ok-fg); }
+.flag.warn { color: var(--warn-fg); }
+.btn { font: 600 .9rem var(--font-display); letter-spacing: .03em; border: 1px solid var(--accent); background: transparent; color: var(--accent); border-radius: 4px; padding: 7px 12px; cursor: pointer; }
+.btn:hover { background: var(--accent); color: var(--accent-ink); }
+.row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+details { font-size: .9rem; }
+details summary { cursor: pointer; font: 600 .9rem var(--font-display); letter-spacing: .03em; }
+details .body { display: grid; gap: 8px; padding-top: 8px; max-width: 70ch; }
+pre { font: .8rem/1.5 var(--font-mono); background: var(--bg); border: 1px solid var(--line); border-radius: 4px; padding: 8px 10px; margin: 0; overflow-x: auto; }
+.foot { font-size: .8rem; color: var(--muted); max-width: 90ch; }
+@media (prefers-reduced-motion: no-preference) { .stage .pos { transition: transform .18s ease-out; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <div class="eyebrow">SANS 10160-3 · Wind actions · Figure 1</div>
+      <h1>Basic wind speed map</h1>
+    </div>
+    <p class="figref" id="figref">Fundamental value of the basic wind speed, v<sub>b,0</sub>, as a 3 s gust, with the municipality values from Annex A.</p>
+  </header>
+
+  <div class="main">
+    <section class="mapcol" aria-label="Wind map">
+      <div class="maptools">
+        <div class="maptitle">Figure 1 · 3 s gust (normative)</div>
+        <div class="checks">
+          <label><input type="checkbox" id="optGrid" checked> 2° grid</label>
+          <label><input type="checkbox" id="optDots"> Municipality points</label>
+        </div>
+      </div>
+      <div class="plate">
+        <div class="stage" id="stage">
+          <img id="mapImg" alt="SANS 10160-3 Figure 1 wind speed map of South Africa" width="958" height="768">
+          <svg id="ov" tabindex="0" role="application" aria-label="Map. Click to place the site. Arrow keys move it by 1 minute, Shift+arrow by 10 minutes." preserveAspectRatio="none"></svg>
+          <div class="tip" id="tip" hidden></div>
+        </div>
+      </div>
+      <div class="maphint">Click the map to place the site. With the map focused, arrow keys move it by 1′ (Shift: 10′).</div>
+    </section>
+
+    <aside class="panel">
+      <section class="card" aria-labelledby="hRes">
+        <h2 id="hRes">Fundamental basic wind speed</h2>
+        <div class="result">
+          <div class="vb"><span id="vbVal">36</span><small>m/s</small></div>
+          <div>
+            <div class="vbsym">v<sub>b,0</sub></div>
+            <div class="src" id="vbSrc">—</div>
+          </div>
+        </div>
+        <div class="msg warn" id="vbNote" hidden></div>
+      </section>
+
+      <section class="card" aria-labelledby="hLoc">
+        <h2 id="hLoc">Municipality</h2>
+        <label class="f" for="selProv">Province
+          <select id="selProv"></select>
+        </label>
+        <label class="f" for="selMun">Municipality
+          <select id="selMun"></select>
+        </label>
+        <label class="f" for="findMun">Find by name
+          <input type="text" id="findMun" list="munList" placeholder="Type a municipality" autocomplete="off">
+        </label>
+        <datalist id="munList"></datalist>
+      </section>
+
+      <section class="card" aria-labelledby="hGps">
+        <h2 id="hGps">Site location (GPS)</h2>
+        <div class="dms">
+          <span></span><span class="hd">° deg</span><span class="hd">′ min</span><span class="hd">″ sec</span>
+          <span class="lab">South</span>
+          <input type="number" id="sD" min="0" max="90" step="1" aria-label="South degrees">
+          <input type="number" id="sM" min="0" max="59" step="1" aria-label="South minutes">
+          <input type="number" id="sS" min="0" max="59.9" step="0.1" aria-label="South seconds">
+          <span class="lab">East</span>
+          <input type="number" id="eD" min="0" max="180" step="1" aria-label="East degrees">
+          <input type="number" id="eM" min="0" max="59" step="1" aria-label="East minutes">
+          <input type="number" id="eS" min="0" max="59.9" step="0.1" aria-label="East seconds">
+        </div>
+        <div class="dec">
+          <label class="f" for="sDec">South (decimal °)<input type="number" id="sDec" step="0.000001"></label>
+          <label class="f" for="eDec">East (decimal °)<input type="number" id="eDec" step="0.000001"></label>
+        </div>
+        <div class="msg err" id="gpsErr" role="alert" hidden></div>
+      </section>
+
+      <section class="card" aria-labelledby="hChk">
+        <h2 id="hChk">Cross-check</h2>
+        <dl class="kv">
+          <dt>Map zone here</dt><dd id="kvZone">—</dd>
+          <dt>Nearest centroid</dt><dd id="kvNear">—</dd>
+          <dt id="kvNearT">Table value</dt><dd id="kvNearV">—</dd>
+          <dt>Image pixel</dt><dd id="kvPx">—</dd>
+        </dl>
+        <div class="row">
+          <button type="button" class="btn" id="btnCopy">Copy summary</button>
+          <span class="src" id="copyMsg" aria-live="polite"></span>
+        </div>
+      </section>
+    </aside>
+  </div>
+
+  <details class="card">
+    <summary>How the coordinates work</summary>
+    <div class="body">
+      <p>South is entered as a positive number of degrees. The map is treated as linear in degrees between its grid lines, so a site's position on the image is:</p>
+      <pre>x = 114.5 + (E − 18) · 687.5 / 14     (pixels, image 958 wide)
+y =  58.0 + (S − 22) · 588.5 / 12     (pixels, image 768 high)
+
+Accepted range: E 16.4 – 33.0, S 22.0 – 34.9</pre>
+      <p>When a municipality is selected, v<sub>b,0</sub> is its value from the municipality table. Otherwise the page reads the zone colour under the site. Where two zones meet, it uses the higher value and shows a warning. If there is no zone under the site, it falls back to 36 m/s.</p>
+      <p>Municipality points are centroids. Large or irregular municipalities can have a centroid that falls in a neighbouring zone, so the table value and the colour under the point can differ. For 14 of the 235 municipalities they do.</p>
+    </div>
+  </details>
+
+  <p class="foot">Source: SANS 10160-3, Basis of structural design and actions for buildings and industrial structures. Part 3: Wind actions.</p>
+</div>
+
+<script>
+const IMG = { G: "__IMG_G__" };
+const PROVINCES = ["None","Eastern Cape","Free State","Gauteng","Kwazulu-Natal","Limpopo","Mpumalanga","Northern Cape","North-West","Western Cape"];
+// [provinceId, municipalityId, name, vb0 (3 s gust, m/s), south deg, east deg]
+const MUNS = __MUNS__;
+
+const BOUNDS = { sMin: 22, sMax: 34.9, eMin: 16.4, eMax: 33 };
+const MAPS = {
+  G: {
+    w: 958, h: 768,
+    // fitted to the grid lines on the image: 18°E at x=114.5, 32°E at x=802; 22°S at y=58, 34°S at y=646.5
+    x0: 114.5, e0: 18, kx: 687.5 / 14,
+    y0: 58, s0: 22, ky: 588.5 / 12,
+    gridE: [18, 20, 22, 24, 26, 28, 30, 32], gridS: [22, 24, 26, 28, 30, 32, 34],
+    legendBox: [690, 520, 892, 652],
+    zones: [ [44, [205, 137, 102]], [40, [245, 202, 123]], [36, [255, 255, 190]], [32, [200, 215, 158]] ],
+    def: 36,
+    title: "Figure 1 · 3 s gust (normative)"
+  }
+};
+const ZONE_COLOR = { 44: "var(--z44)", 40: "var(--z40)", 36: "var(--z36)", 32: "var(--z32)" };
+const ZONE_HEX = { 44: "#cd8966", 40: "#f5ca7b", 36: "#ffffbe", 32: "#c8d79e" };
+
+const $ = id => document.getElementById(id);
+const state = { map: "G", s: 26.007167, e: 28.102222, mun: 0, prov: 0 };
+try {
+  const saved = JSON.parse(localStorage.getItem("windmap-state") || "null");
+  if (saved && typeof saved === "object") {
+    if (Number.isFinite(saved.s) && Number.isFinite(saved.e) && saved.s >= 22 && saved.s <= 34.9 && saved.e >= 16.4 && saved.e <= 33) { state.s = saved.s; state.e = saved.e; }
+    if (Number.isInteger(saved.prov) && saved.prov >= 0 && saved.prov <= 9) state.prov = saved.prov;
+    const mu = MUNS.find(x => x[1] && x[1] === saved.mun);
+    if (mu && (state.prov === 0 || mu[0] === state.prov)) state.mun = mu[1];
+  }
+} catch (_) {}
+function save() { try { localStorage.setItem("windmap-state", JSON.stringify(state)); } catch (_) {} }
+
+// ---------- coordinate maths ----------
+const toPx = (m, s, e) => [m.x0 + (e - m.e0) * m.kx, m.y0 + (s - m.s0) * m.ky];
+const toDeg = (m, x, y) => [m.s0 + (y - m.y0) / m.ky, m.e0 + (x - m.x0) / m.kx];
+const inBounds = (s, e) => s >= BOUNDS.sMin && s <= BOUNDS.sMax && e >= BOUNDS.eMin && e <= BOUNDS.eMax;
+function toDMS(deg) {
+  const tenths = Math.round(Math.abs(deg) * 36000);   // seconds to 0.1″
+  const d = Math.floor(tenths / 36000);
+  const m = Math.floor((tenths - d * 36000) / 600);
+  const s = (tenths - d * 36000 - m * 600) / 10;
+  return [d, m, s];
+}
+const fromDMS = (d, m, s) => d + (m + s / 60) / 60;
+const fmtDMS = (deg, hemi) => { const [d, m, s] = toDMS(deg); return `${d}°${String(m).padStart(2, "0")}′${s.toFixed(1).padStart(4, "0")}″${hemi}`; };
+function distKm(s1, e1, s2, e2) {
+  const r = Math.PI / 180, a = Math.sin((s2 - s1) * r / 2) ** 2 + Math.cos(s1 * r) * Math.cos(s2 * r) * Math.sin((e2 - e1) * r / 2) ** 2;
+  return 2 * 6371 * Math.asin(Math.sqrt(a));
+}
+function nearestMun(s, e) {
+  let best = null, bd = Infinity;
+  for (const m of MUNS) { if (m[1] === 0) continue; const d = distKm(s, e, m[4], m[5]); if (d < bd) { bd = d; best = m; } }
+  return [best, bd];
+}
+
+// ---------- colour sampling (3 s gust map only) ----------
+const pixels = {};
+function loadPixels(key) {
+  return new Promise(res => {
+    const im = new Image();
+    im.onload = () => {
+      try {
+        const c = document.createElement("canvas"); c.width = im.naturalWidth; c.height = im.naturalHeight;
+        const g = c.getContext("2d", { willReadFrequently: true }); g.drawImage(im, 0, 0);
+        pixels[key] = g.getImageData(0, 0, c.width, c.height);
+      } catch (_) { pixels[key] = null; }
+      res();
+    };
+    im.onerror = () => { pixels[key] = null; res(); };
+    im.src = IMG[key];
+  });
+}
+// Only pixels that closely match a legend colour vote, so anti-aliased boundary lines (which blend
+// into the colour of a different zone) are ignored. Where two zones are present the higher one wins,
+// matching how a designer reads a site on a zone boundary.
+function zoneVotes(m, pd, x, y, R) {
+  const votes = {}; let n = 0;
+  for (let dy = -R; dy <= R; dy++) for (let dx = -R; dx <= R; dx++) {
+    const px = Math.round(x + dx), py = Math.round(y + dy);
+    if (px < 0 || py < 0 || px >= pd.width || py >= pd.height) continue;
+    const i = (py * pd.width + px) * 4, r = pd.data[i], g = pd.data[i + 1], b = pd.data[i + 2];
+    let bz = null, bd = Infinity;
+    for (const [z, [zr, zg, zb]] of m.zones) { const d = (r - zr) ** 2 + (g - zg) ** 2 + (b - zb) ** 2; if (d < bd) { bd = d; bz = z; } }
+    if (bd < 24 * 24) { votes[bz] = (votes[bz] || 0) + 1; n++; }
+  }
+  if (n < 6) return null;
+  const present = Object.keys(votes).map(Number).filter(z => votes[z] >= Math.max(3, 0.12 * n));
+  if (!present.length) return null;
+  return { kind: "zone", z: Math.max(...present), boundary: present.length > 1, present: present.sort((a, b) => b - a) };
+}
+function zoneAt(key, s, e) {
+  const m = MAPS[key], pd = pixels[key];
+  if (!m.zones) return { kind: "na" };
+  if (pd === undefined) return { kind: "loading" };
+  if (!pd) return { kind: "na" };
+  const [x, y] = toPx(m, s, e);
+  const lb = m.legendBox;
+  if (lb && x >= lb[0] && x <= lb[2] && y >= lb[1] && y <= lb[3]) return { kind: "legend" };
+  const near = zoneVotes(m, pd, x, y, 4);
+  if (near) return near;
+  // On a coastline or thick border: look a little wider before giving up
+  const wide = zoneVotes(m, pd, x, y, 9);
+  return wide ? { ...wide, boundary: true, edge: true } : { kind: "none" };
+}
+
+// ---------- drawing ----------
+const NS = "http://www.w3.org/2000/svg";
+const svg = $("ov");
+function el(tag, attrs, parent) { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); if (parent) parent.appendChild(n); return n; }
+let gGrid, gDots, gPos;
+function drawStatic() {
+  const m = MAPS[state.map];
+  svg.setAttribute("viewBox", `0 0 ${m.w} ${m.h}`);
+  svg.replaceChildren();
+  gGrid = el("g", { stroke: "var(--grid)", "stroke-width": 1, opacity: .75, "vector-effect": "non-scaling-stroke" }, svg);
+  for (const e of m.gridE) { const [x] = toPx(m, 0, e); el("line", { x1: x, y1: 0, x2: x, y2: m.h, "vector-effect": "non-scaling-stroke" }, gGrid); }
+  for (const s of m.gridS) { const [, y] = toPx(m, s, 0); el("line", { x1: 0, y1: y, x2: m.w, y2: y, "vector-effect": "non-scaling-stroke" }, gGrid); }
+  gGrid.style.display = $("optGrid").checked ? "" : "none";
+  gDots = el("g", {}, svg);
+  for (const mu of MUNS) {
+    if (mu[1] === 0) continue;
+    const [x, y] = toPx(m, mu[4], mu[5]);
+    const c = el("circle", { cx: x, cy: y, r: 3.2, fill: ZONE_HEX[mu[3]], stroke: "#222", "stroke-width": .8 }, gDots);
+    el("title", {}, c).textContent = `${mu[2]} · ${mu[3]} m/s`;
+  }
+  gDots.style.display = $("optDots").checked ? "" : "none";
+  gPos = el("g", { class: "pos" }, svg);
+  el("line", { id: "posH", x1: 0, x2: m.w, stroke: "#1d4fd8", "stroke-width": 2, "vector-effect": "non-scaling-stroke" }, gPos);
+  el("line", { id: "posV", y1: 0, y2: m.h, stroke: "#1d4fd8", "stroke-width": 2, "vector-effect": "non-scaling-stroke" }, gPos);
+  el("circle", { id: "posC", r: 7, fill: "none", stroke: "#1d4fd8", "stroke-width": 2.5, "vector-effect": "non-scaling-stroke" }, gPos);
+  $("mapImg").src = IMG[state.map];
+  $("mapImg").width = m.w; $("mapImg").height = m.h;
+  $("mapImg").alt = `SANS 10160-3 ${m.title} wind speed map of South Africa`;
+}
+function drawPos() {
+  const m = MAPS[state.map];
+  const [x, y] = toPx(m, state.s, state.e);
+  const h = svg.querySelector("#posH"), v = svg.querySelector("#posV"), c = svg.querySelector("#posC");
+  h.setAttribute("y1", y); h.setAttribute("y2", y);
+  v.setAttribute("x1", x); v.setAttribute("x2", x);
+  c.setAttribute("cx", x); c.setAttribute("cy", y);
+}
+
+// ---------- panel ----------
+function fillProvinces() {
+  $("selProv").replaceChildren(...PROVINCES.map((p, i) => new Option(p, i)));
+  $("munList").replaceChildren(...MUNS.filter(m => m[1]).map(m => { const o = document.createElement("option"); o.value = `${m[2]} (${PROVINCES[m[0]]})`; return o; }));
+}
+function fillMunicipalities() {
+  const list = MUNS.filter(m => m[1] && (state.prov === 0 || m[0] === state.prov)).sort((a, b) => a[2].localeCompare(b[2]));
+  $("selMun").replaceChildren(new Option("— None —", 0), ...list.map(m => new Option(state.prov ? m[2] : `${m[2]} (${PROVINCES[m[0]]})`, m[1])));
+  $("selMun").value = list.some(m => m[1] === state.mun) ? state.mun : 0;
+}
+function syncInputs(except) {
+  const [sd, sm, ss] = toDMS(state.s), [ed, em, es] = toDMS(state.e);
+  const set = (id, v) => { if (id !== except && !(except === "dms" && /^[se][DMS]$/.test(id))) $(id).value = v; };
+  set("sD", sd); set("sM", sm); set("sS", ss.toFixed(1));
+  set("eD", ed); set("eM", em); set("eS", es.toFixed(1));
+  if (except !== "dec") { $("sDec").value = state.s.toFixed(6); $("eDec").value = state.e.toFixed(6); }
+}
+const chip = z => `<span class="chip"><span class="sw" style="background:${ZONE_COLOR[z]}"></span>${z} m/s</span>`;
+
+function update(opts = {}) {
+  const m = MAPS[state.map];
+  drawPos();
+  if (!opts.keepInputs) syncInputs(opts.except);
+  $("gpsErr").hidden = true;
+
+  const mun = state.mun ? MUNS.find(x => x[1] === state.mun) : null;
+  const zone = zoneAt(state.map, state.s, state.e);
+  const [near, nd] = nearestMun(state.s, state.e);
+
+  // v_b,0 — municipality table first, otherwise the colour under the site
+  let vb, src, note = "";
+  if (mun) { vb = mun[3]; src = `Municipality table: ${mun[2]}`; }
+  else if (zone.kind === "zone") { vb = zone.z; src = zone.boundary ? "Read from the map: higher of the zones at the site" : "Read from the map colour at the site"; }
+  else if (zone.kind === "loading") { vb = m.def; src = "Reading the map…"; }
+  else {
+    vb = m.def; src = "Default (no zone under the site)";
+    note = zone.kind === "legend" ? "The site is on the legend box, not on the map."
+      : zone.kind === "na" ? "This browser could not read the map colours. Read the zone from the map yourself."
+      : "No wind zone colour under the site. It may be outside South Africa (sea, Lesotho or a neighbouring country).";
+  }
+  if (mun && zone.kind === "zone" && !zone.present.includes(mun[3])) note = `The map colour at this point is ${zone.present.join(" / ")} m/s, but the table gives ${mun[3]} m/s for ${mun[2]}. The point is the municipality's centroid, so check the site's actual position on the map.`;
+  else if (!mun && zone.kind === "zone" && zone.boundary) note = `The site is on or near a zone boundary (${zone.present.join(" / ")} m/s). The higher value is used. Check the exact position.`;
+  $("vbVal").textContent = vb;
+  $("vbSrc").textContent = src;
+  $("vbNote").hidden = !note; $("vbNote").textContent = note;
+
+  $("kvZone").innerHTML = zone.kind === "zone" ? zone.present.map(chip).join(" ") + (zone.boundary ? ` <span class="flag warn">${zone.edge ? "near the coast or a border" : "zone boundary"}</span>` : "")
+    : zone.kind === "na" ? "Unavailable" : zone.kind === "loading" ? "Reading…"
+    : zone.kind === "legend" ? "On the legend" : "None (outside zones)";
+  $("kvNear").textContent = near ? `${near[2]} (${PROVINCES[near[0]]}), ${nd.toFixed(1)} km` : "—";
+  $("kvNearV").innerHTML = near ? chip(near[3]) + (zone.kind === "zone" ? (zone.present.includes(near[3]) ? ` <span class="flag ok">matches map</span>` : ` <span class="flag warn">differs from map</span>`) : "") : "—";
+  const [px, py] = toPx(m, state.s, state.e);
+  $("kvPx").textContent = `x ${px.toFixed(1)}, y ${py.toFixed(1)} of ${m.w}×${m.h}`;
+  save();
+}
+
+// Rejected input: show why, and put the fields back to the site that is still in use.
+function rejectInput(msg) {
+  syncInputs();
+  $("gpsErr").textContent = msg;
+  $("gpsErr").hidden = false;
+}
+function setLocation(s, e, opts = {}) {
+  if (!isFinite(s) || !isFinite(e)) return rejectInput("Enter a number for both South and East. The site has not moved.");
+  if (!inBounds(s, e)) {
+    return rejectInput(`${s.toFixed(4)}° S, ${e.toFixed(4)}° E is outside the map. Enter South between ${BOUNDS.sMin}° and ${BOUNDS.sMax}° and East between ${BOUNDS.eMin}° and ${BOUNDS.eMax}°. The site has not moved.`);
+  }
+  state.s = s; state.e = e;
+  if (!opts.keepMun) { state.mun = 0; $("selMun").value = 0; }
+  update(opts);
+}
+
+// ---------- events ----------
+$("optGrid").addEventListener("change", e => { gGrid.style.display = e.target.checked ? "" : "none"; });
+$("optDots").addEventListener("change", e => { gDots.style.display = e.target.checked ? "" : "none"; });
+
+$("selProv").addEventListener("change", e => {
+  state.prov = +e.target.value;
+  const cur = MUNS.find(x => x[1] === state.mun);
+  if (state.prov && cur && cur[0] !== state.prov) state.mun = 0;
+  fillMunicipalities(); update();
+});
+$("selMun").addEventListener("change", e => {
+  const id = +e.target.value; const mu = MUNS.find(x => x[1] === id);
+  state.mun = id;
+  if (mu && id) setLocation(mu[4], mu[5], { keepMun: true }); else update();
+});
+// Exact "Name (Province)" or name first, then names starting with the text, then any word starting
+// with it, then anywhere in the name. Two or more hits are never resolved silently: several
+// municipalities share a name (Emalahleni is 36 m/s in Mpumalanga and 44 m/s in the Eastern Cape).
+function findMunicipalities(text) {
+  const v = text.trim().toLowerCase();
+  const all = MUNS.filter(m => m[1]);
+  const label = m => `${m[2]} (${PROVINCES[m[0]]})`.toLowerCase();
+  const tests = [
+    m => label(m) === v,
+    m => m[2].toLowerCase() === v,
+    m => m[2].toLowerCase().startsWith(v),
+    m => m[2].toLowerCase().split(/[\s\/-]+/).some(w => w.startsWith(v)),
+    m => m[2].toLowerCase().includes(v)
+  ];
+  for (const t of tests) {
+    let hits = all.filter(t);
+    if (hits.length > 1 && state.prov) { const inProv = hits.filter(m => m[0] === state.prov); if (inProv.length) hits = inProv; }
+    if (hits.length) return hits;
+  }
+  return [];
+}
+$("findMun").addEventListener("change", e => {
+  if (!e.target.value.trim()) return;
+  const hits = findMunicipalities(e.target.value);
+  const g = $("gpsErr");
+  if (!hits.length) { g.textContent = `No municipality matches “${e.target.value}”.`; g.hidden = false; return; }
+  if (hits.length > 1) {
+    const names = hits.slice(0, 8).map(m => `${m[2]} (${PROVINCES[m[0]]})`).join("; ");
+    g.textContent = `${hits.length} municipalities match “${e.target.value}”: ${names}${hits.length > 8 ? "; …" : ""}. Pick one from the list or choose the province first.`;
+    g.hidden = false; return;
+  }
+  const mu = hits[0];
+  state.prov = mu[0]; $("selProv").value = mu[0]; state.mun = mu[1]; fillMunicipalities();
+  setLocation(mu[4], mu[5], { keepMun: true });
+  e.target.value = "";
+});
+for (const id of ["sD", "sM", "sS", "eD", "eM", "eS"]) {
+  $(id).addEventListener("change", () => {
+    const parts = ["sD", "sM", "sS", "eD", "eM", "eS"].map(k => { const t = $(k).value.trim(); return t === "" ? 0 : parseFloat(t); });
+    if (parts.some(p => !isFinite(p))) return rejectInput("Enter numbers in every degree, minute and second box. The site has not moved.");
+    if (parts.some(p => p < 0) || parts[1] >= 60 || parts[2] >= 60 || parts[4] >= 60 || parts[5] >= 60)
+      return rejectInput("Degrees, minutes and seconds must be positive, and minutes and seconds below 60. The site has not moved.");
+    setLocation(fromDMS(parts[0], parts[1], parts[2]), fromDMS(parts[3], parts[4], parts[5]));
+  });
+}
+for (const id of ["sDec", "eDec"]) {
+  $(id).addEventListener("change", () => setLocation(parseFloat($("sDec").value), parseFloat($("eDec").value), { except: "dec" }));
+}
+
+function evtToDeg(ev) {
+  const r = svg.getBoundingClientRect(), m = MAPS[state.map];
+  const x = (ev.clientX - r.left) * m.w / r.width, y = (ev.clientY - r.top) * m.h / r.height;
+  return [...toDeg(m, x, y), ev.clientX - r.left, ev.clientY - r.top];
+}
+svg.addEventListener("click", ev => { const [s, e] = evtToDeg(ev); setLocation(s, e); });
+svg.addEventListener("pointermove", ev => {
+  if (ev.pointerType === "touch") return;
+  const [s, e, lx, ly] = evtToDeg(ev), tip = $("tip");
+  if (!inBounds(s, e)) { tip.hidden = true; return; }
+  const z = zoneAt(state.map, s, e);
+  const zt = z.kind === "zone" ? `<span class="sw" style="background:${ZONE_HEX[z.z]}"></span>${z.z} m/s` : "";
+  tip.innerHTML = `${fmtDMS(s, " S")}<br>${fmtDMS(e, " E")}${zt ? "<br>" + zt : ""}`;
+  const st = $("stage").getBoundingClientRect();
+  tip.style.left = Math.min(lx, st.width - 170) + "px"; tip.style.top = Math.min(ly, st.height - 60) + "px";
+  tip.hidden = false;
+});
+svg.addEventListener("pointerleave", () => { $("tip").hidden = true; });
+svg.addEventListener("keydown", ev => {
+  const step = (ev.shiftKey ? 10 : 1) / 60;
+  const d = { ArrowUp: [-step, 0], ArrowDown: [step, 0], ArrowLeft: [0, -step], ArrowRight: [0, step] }[ev.key];
+  if (!d) return;
+  ev.preventDefault();
+  const s = Math.min(BOUNDS.sMax, Math.max(BOUNDS.sMin, state.s + d[0])), e = Math.min(BOUNDS.eMax, Math.max(BOUNDS.eMin, state.e + d[1]));
+  setLocation(s, e);
+});
+
+$("btnCopy").addEventListener("click", () => {
+  const mun = state.mun ? MUNS.find(x => x[1] === state.mun) : null;
+  const text = [
+    "SANS 10160-3 Fig 1 (3 s gust)",
+    `Site: ${fmtDMS(state.s, " S")}, ${fmtDMS(state.e, " E")} (${state.s.toFixed(6)} S, ${state.e.toFixed(6)} E)`,
+    mun ? `Municipality: ${mun[2]} (${PROVINCES[mun[0]]})` : null,
+    `vb,0 = ${$("vbVal").textContent} m/s (${$("vbSrc").textContent.replace(/:$/, "")})`
+  ].filter(Boolean).join("\n");
+  const done = msg => { $("copyMsg").textContent = msg; setTimeout(() => { $("copyMsg").textContent = ""; }, 2500); };
+  try {
+    navigator.clipboard.writeText(text).then(() => done("Copied"), () => fallback());
+  } catch (_) { fallback(); }
+  function fallback() {
+    const ta = document.createElement("textarea"); ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    let ok = false; try { ok = document.execCommand("copy"); } catch (_) {}
+    ta.remove(); done(ok ? "Copied" : "Copy blocked. Select the coordinates manually.");
+  }
+});
+
+// ---------- start ----------
+fillProvinces();
+$("selProv").value = state.prov; fillMunicipalities();
+drawStatic(); update();
+Promise.all([loadPixels("G")]).then(() => update());
+</script>
